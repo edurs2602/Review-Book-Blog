@@ -70,10 +70,10 @@ WSGI_APPLICATION = 'livros.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'livros',
-        'USER': 'livros',
-        'PASSWORD': 'livros',
-        'HOST': 'localhost',
+        'NAME': 'review_book_db',
+        'USER': 'admin',
+        'PASSWORD': 'GAcNmORLuBAIfXb6lFox0YJb4N0Wwzuh',
+        'HOST': 'dpg-cnafl4tjm4es73c8241g-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
