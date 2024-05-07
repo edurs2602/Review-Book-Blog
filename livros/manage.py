@@ -7,6 +7,12 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'livros.settings')
+
+    # Verifica se o comando é `runserver` e se não foi especificada uma porta
+    if len(sys.argv) == 1 or (sys.argv[1] == "runserver" and len(sys.argv) < 3):
+        # Adiciona a porta padrão `5000`
+        sys.argv.append("5000")
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
