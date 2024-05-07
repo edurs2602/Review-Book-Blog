@@ -50,10 +50,15 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-                    <form method="GET" action=".">
-                        <input type="text" name="query" class="search-input" placeholder="Pesquisar por título, autor ou ISBN" value="{{ form.query.value }}">
-                        <input type="submit" value="Pesquisar" />
+                    <form method="GET" action="." class="mb-4">
+                        <div class="input-group mb-3">
+                            <!-- Campo de entrada estilizado com `form-control` -->
+                            <input type="text" name="query" class="form-control" placeholder="Pesquisar por título ou autor" value="{{ form.query.value }}">
+                            <!-- Botão de envio estilizado com `btn btn-primary` -->
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                        </div>
                     </form>
+
                     {% for livro in livros %}
                         <div class="post-preview">
                             <a href="{% url 'livro' livro.id %}">
