@@ -72,12 +72,20 @@ WSGI_APPLICATION = 'livros.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'review_book_db',
+    #     'USER': 'admin',
+    #     'PASSWORD': 'GAcNmORLuBAIfXb6lFox0YJb4N0Wwzuh',
+    #     'HOST': 'dpg-cnafl4tjm4es73c8241g-a.oregon-postgres.render.com',
+    #     'PORT': '5432',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'review_book_db',
-        'USER': 'admin',
-        'PASSWORD': 'GAcNmORLuBAIfXb6lFox0YJb4N0Wwzuh',
-        'HOST': 'dpg-cnafl4tjm4es73c8241g-a.oregon-postgres.render.com',
+        'NAME': 'livros',
+        'USER': 'livros',
+        'PASSWORD': 'livros',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

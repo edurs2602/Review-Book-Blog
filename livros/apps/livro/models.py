@@ -1,5 +1,8 @@
 from django.db import models
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class Livro(models.Model):
 
@@ -11,13 +14,13 @@ class Livro(models.Model):
 
     obra = models.CharField(max_length=100, blank=False, null=False, verbose_name='Obra');
     autor = models.CharField(max_length=100, verbose_name='Autor');
-    indice_catalogo = models.CharField(max_length=50, verbose_name='Indice Para Catalogo');
-    editora = models.CharField(max_length=50, verbose_name='Editora');
+    indice_catalogo = models.CharField(max_length=100, verbose_name='Indice Para Catalogo');
+    editora = models.CharField(max_length=100, verbose_name='Editora');
     edicao = models.CharField(max_length=12, verbose_name='Edição');
     publicacao = models.IntegerField(verbose_name='Publicação');
-    cidade = models.CharField(max_length=30, verbose_name='Cidade');
-    pais_origem = models.CharField(max_length=20, verbose_name='Pais de Origem');
-    isbn = models.CharField(max_length=30, verbose_name='ISBN');
+    cidade = models.CharField(max_length=50, verbose_name='Cidade');
+    pais_origem = models.CharField(max_length=50, verbose_name='Pais de Origem');
+    isbn = models.CharField(max_length=40, verbose_name='ISBN');
     resenha = models.TextField(blank=True, null=True, verbose_name='Resenha');
 
     # foto = models.ImageField(
@@ -25,3 +28,20 @@ class Livro(models.Model):
 
     def __str__(self):
         return f'{str(self.obra)} - {self.autor}';
+
+
+class File(models.Model):
+    path = 'apps/livro/planilha'
+
+    file = models.FileField(upload_to=path, verbose_name='file')
+
+    def __str__(self):
+        return f'{str(self.file)}';
+
+
+@receiver(post_save, sender=File)
+def delete_old_files(sender, instance, **kwargs):
+    old_files = File.objects.exclude(pk=instance.pk)
+    for old_file in old_files:
+        old_file.file.delete()
+        old_file.delete()
